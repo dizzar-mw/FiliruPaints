@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Filiru Paints</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+    }
+    header {
+      background: linear-gradient(135deg, #ff9800, #ff5722);
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 3rem;
+      margin: 0;
+    }
+    header p {
+      font-size: 1.3rem;
+      margin-top: 10px;
+    }
+    nav {
+      position: sticky;
+      top: 0;
+      background: #222;
+      padding: 10px;
+      text-align: center;
+    }
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      color: #ff9800;
+    }
+    section {
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .services, .gallery, .team {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: #f4f4f4;
+      border-radius: 12px;
+      padding: 20px;
+      transition: transform 0.3s;
+    }
+    .card:hover {
+      transform: scale(1.05);
+      background: #ffe0b2;
+    }
+    .card img {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 15px;
+    }
+    footer {
+      background: #222;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    footer a {
+      color: #ff9800;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <header>
+    <h1>Filiru Paints</h1>
+    <p>Bringing Colors to Life – Houses, Lodges, Art & More</p>
+  </header>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="#services">Services</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#team">Our Team</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <!-- Services -->
+  <section id="services">
+    <h2>Our Services</h2>
+    <div class="services">
+      <div class="card"><h3>House Painting</h3><p>Professional house and lodge painting with vibrant colors.</p></div>
+      <div class="card"><h3>Sign Writing</h3><p>Custom sign designs to make your brand stand out.</p></div>
+      <div class="card"><h3>Portrait Drawing</h3><p>Hand-drawn portraits full of detail and life.</p></div>
+      <div class="card"><h3>T-shirt Printing</h3><p>Screen printed T-shirts with artistic designs.</p></div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section id="gallery">
+    <h2>Gallery</h2>
+    <div class="gallery">
+      <div class="card"><img src="https://via.placeholder.com/300x200" alt="Painted House"><p>Beautifully painted house</p></div>
+      <div class="card"><img href="https://www.neverpaintagain.co.uk/blog/house-painting-newton-abbot-devon" alt="Sign Writing"><p>Custom sign artwork</p></div>
+      <div class="card"><img src="https://via.placeholder.com/300x200" alt="Portrait"><p>Hand-drawn portrait</p></div>
+      <div class="card"><img src="https://via.placeholder.com/300x200" alt="T-shirt Print"><p>Creative T-shirt design</p></div>
+    </div>
+  </section>
+
+  <!-- Team -->
+  <section id="team">
+    <h2>Meet Our Team</h2>
+    <div class="team">
+      <div class="card">
+        <img src="fisa.jpg" alt="Desire Mapira">
+        <h3>Desire Mapira</h3>
+        <p>Manager of Filiru Paints</p>
+      </div>
+      <!-- Add more members here -->
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <p>Email: <a href="mailto:desiremapira@gmail.com">desiremapira@gmail.com</a></p>
+    <p>Phone: <a href="tel:0882772100">0882772100</a></p>
+    <form>
+      <input type="text" placeholder="Your Name" required><br><br>
+      <input type="email" placeholder="Your Email" required><br><br>
+      <textarea placeholder="Your Message" required></textarea><br><br>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Filiru Paints. Designed with 🎨 and passion.</p>
+  </footer>
+
+</body>
+</html>
