@@ -3,12 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-site-verification" content="ueYvXyFdGsVcHyYBAlXatFvcg30CtsmPAdAV3ilQRcs" />
+    <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE">
+    <meta property="og:title" content="Filiru Paints">
+    <meta property="og:description" content="Professional painting services">
+    <meta property="og:image" content="YOUR_IMAGE_URL">
+    <meta property="og:url" content="YOUR_URL">
     <title>Filiru Paints</title>
-    <!-- Other head elements -->
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        header { background: linear-gradient(to right, #ff7e5f, #feb47b); position: sticky; top: 0; z-index: 1000; }
+        nav { display: flex; justify-content: space-around; padding: 10px; }
+        nav a { color: white; text-decoration: none; padding: 10px 15px; }
+        nav a:hover { background: rgba(255, 255, 255, 0.3); border-radius: 5px; }
+        .container { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); padding: 20px; gap: 20px; }
+        .card { border: 1px solid #ddd; border-radius: 5px; padding: 15px; transition: transform 0.3s; }
+        .card:hover { transform: scale(1.05); }
+        footer { text-align: center; padding: 20px; background: #333; color: white; }
+        form { display: flex; flex-direction: column; }
+        form input, form textarea { margin: 10px 0; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
+    </style>
 </head>
 <body>
-    <h1>Welcome to Filiru Paints</h1>
-    <!-- Body content -->
+<header>
+    <nav>
+        <a href="#services">Services</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#team">Team</a>
+        <a href="#contact">Contact</a>
+    </nav>
+</header>
+
+<section id="services" class="container">
+    <h2>Our Services</h2>
+    <div class="card">Painting Services 1</div>
+    <div class="card">Painting Services 2</div>
+    <div class="card">Painting Services 3</div>
+</section>
+
+<section id="gallery" class="container">
+    <h2>Gallery</h2>
+    <div class="card">Gallery Image 1</div>
+    <div class="card">Gallery Image 2</div>
+    <div class="card">Gallery Image 3</div>
+</section>
+
+<section id="team" class="container">
+    <h2>Meet Our Team</h2>
+    <div class="card">Team Member 1</div>
+    <div class="card">Team Member 2</div>
+    <div class="card">Team Member 3</div>
+</section>
+
+<section id="contact">
+    <h2>Contact Us</h2>
+    <form id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <textarea name="message" placeholder="Your Message" required></textarea>
+        <button type="submit">Send</button>
+    </form>
+</section>
+
+<footer>
+    <p>&copy; 2026 Filiru Paints. All rights reserved.</p>
+</footer>
+<script>
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const form = e.target;
+        fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { 'Accept': 'application/json' }
+        }).then(response => {
+            if (response.ok) {
+                alert('Thank you for your submission!');
+                form.reset();
+            } else {
+                alert('There was a problem with your submission.');
+            }
+        });
+    });
+</script>
 </body>
 </html>
