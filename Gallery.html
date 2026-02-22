@@ -1,1 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Filiru Paints | Portfolio Gallery</title>
+  <style>
+    /* MATCHING YOUR ORIGINAL STYLE */
+    body { margin: 0; font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+    
+    header {
+      background: linear-gradient(135deg, #ff9800, #ff5722);
+      color: white; padding: 40px 20px; text-align: center; cursor: pointer;
+    }
+    header h1 { font-size: 2.5rem; margin: 0; }
+    
+    nav {
+      position: sticky; top: 0; background: #222;
+      padding: 10px; text-align: center; z-index: 1000;
+    }
+    nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; }
+    nav a:hover { color: #ff9800; }
 
+    section { padding: 40px 20px; text-align: center; }
+    h2 { color: #ff5722; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+
+    /* GRID SYSTEM */
+    .gallery-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px; max-width: 1200px; margin: 0 auto;
+    }
+    .card {
+      background: #f4f4f4; border-radius: 12px; padding: 15px;
+      transition: transform 0.3s; cursor: pointer;
+    }
+    .card:hover { transform: scale(1.03); background: #ffe0b2; }
+    .card img { width: 100%; border-radius: 8px; height: 220px; object-fit: cover; }
+
+    /* POP-UP MODAL */
+    #photoModal {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.9); display: none; justify-content: center;
+      align-items: center; z-index: 2000; cursor: zoom-out;
+    }
+    #photoModal img { max-width: 90%; max-height: 85%; border: 4px solid white; border-radius: 10px; }
+
+    footer { background: #222; color: white; padding: 20px; text-align: center; margin-top: 50px; }
+  </style>
+</head>
+<body>
+
+  <header onclick="window.location.href='index.html'">
+    <h1>Filiru Paints</h1>
+    <p>← Back to Home</p>
+  </header>
+
+  <nav>
+    <a href="#tshirts">T-Shirts</a>
+    <a href="#houses">Houses</a>
+    <a href="#portraits">Portraits</a>
+    <a href="#banners">Banners/Signs</a>
+  </nav>
+
+  <section id="tshirts">
+    <h2>T-Shirt Writing & Design</h2>
+    <div class="gallery-container" id="grid1">Loading T-Shirts...</div>
+  </section>
+
+  <section id="houses">
+    <h2>Houses & Lodges</h2>
+    <div class="gallery-container" id="grid2">Loading Houses...</div>
+  </section>
+
+  <section id="portraits">
+    <h2>Hand Drawn Portraits</h2>
+    <div class="gallery-container" id="grid3">Loading Portraits...</div>
+  </section>
+
+  <section id="banners">
+    <h2>Sign Writings & Banners</h2>
+    <div class="gallery-container" id="grid4">Loading Banners...</div>
+  </section>
+
+  <div id="photoModal" onclick="this.style.display='none'">
+    <img id="modalImg" src="">
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Filiru Paints | Lilongwe, Malawi</p>
+  </footer>
+
+  <script>
+    const GITHUB_DATA = {
+      user: 'Dizzar-mw',
+      repo: 'FiliruPaints'
+    };
+
+    async function loadGalleryFolder(folderName, gridId) {
+      const grid = document.getElementById(gridId);
+      const url = `https://api.github.com/repos/${GITHUB_DATA.user}/${GITHUB_DATA.repo}/contents/${folderName}`;
+
+      try {
+        const response = await fetch(url);
+        const files = await response.json();
+
+        if (response.ok) {
+          grid.innerHTML = '';
+          files.forEach(file => {
+            if (file.name.match(/\.(jpg|jpeg|png|webp|gif)$/i)) {
+              const card = document.createElement('div');
+              card.className = 'card';
+              card.innerHTML = `<img src="${file.download_url}" alt="Work"><p>Enlarge Photo</p>`;
+              card.onclick = () => {
+                document.getElementById('modalImg').src = file.download_url;
+                document.getElementById('photoModal').style.display = 'flex';
+              };
+              grid.appendChild(card);
+            }
+          });
+        } else {
+          grid.innerHTML = '<p>No photos in this category yet.</p>';
+        }
+      } catch (err) {
+        grid.innerHTML = '<p>Error connecting to GitHub.</p>';
+      }
+    }
+
+    // Load all categories on page start
+    window.onload = () => {
+      loadGalleryFolder('gallery1', 'grid1');
+      loadGalleryFolder('gallery2', 'grid2');
+      loadGalleryFolder('gallery3', 'grid3');
+      loadGalleryFolder('gallery4', 'grid4');
+    };
+  </script>
+</body>
+</html>
