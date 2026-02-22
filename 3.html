@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Filiru Paints</title>
+  <style>
+    /* PRESERVING YOUR ORIGINAL STYLES */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+    }
+    header {
+      background: linear-gradient(135deg, #ff9800, #ff5722);
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 3rem;
+      margin: 0;
+    }
+    header p {
+      font-size: 1.3rem;
+      margin-top: 10px;
+    }
+    nav {
+      position: sticky;
+      top: 0;
+      background: #222;
+      padding: 10px;
+      text-align: center;
+      z-index: 1000;
+    }
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      color: #ff9800;
+    }
+    section {
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    /* GRID SYSTEM FOR CATEGORIES */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: #f4f4f4;
+      border-radius: 12px;
+      padding: 20px;
+      transition: transform 0.3s;
+      cursor: pointer;
+    }
+    .card:hover {
+      transform: scale(1.05);
+      background: #ffe0b2;
+    }
+    .card img {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    /* POP-UP MODAL STYLING */
+    #photoModal {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.9); display: none; justify-content: center;
+      align-items: center; z-index: 2000; cursor: zoom-out;
+    }
+    #photoModal img { max-width: 90%; max-height: 80%; border: 4px solid white; border-radius: 8px; }
+
+    /* FORM STYLING */
+    #contactForm {
+      max-width: 500px;
+      margin: 0 auto;
+      text-align: left;
+    }
+    #contactForm input, #contactForm textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+    #contactForm button {
+      background: #ff5722;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      transition: background 0.3s;
+    }
+
+    footer {
+      background: #222;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Filiru Paints</h1>
+    <p>Bringing Colors to Life – Houses, Lodges, Art & More</p>
+  </header>
+
+  <nav>
+    <a href="#tshirts">T-Shirt Writing</a>
+    <a href="#houses">Houses & Lodges</a>
+    <a href="#portraits">Portraits</a>
+    <a href="#banners">Banners/Signs</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <section id="tshirts">
+    <h2>T-Shirt Writing & Design</h2>
+    <div class="gallery" id="gallery1">Loading images...</div>
+  </section>
+
+  <section id="houses" style="background:#fafafa;">
+    <h2>Houses & Lodges</h2>
+    <div class="gallery" id="gallery2">Loading images...</div>
+  </section>
+
+  <section id="portraits">
+    <h2>Hand Drawn Portraits</h2>
+    <div class="gallery" id="gallery3">Loading images...</div>
+  </section>
+
+  <section id="banners" style="background:#fafafa;">
+    <h2>Sign Writings & Banners</h2>
+    <div class="gallery" id="gallery4">Loading images...</div>
+  </section>
+
+  <div id="photoModal" onclick="this.style.display='none'">
+    <img id="modalImg" src="">
+  </div>
+
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <form id="contactForm" action="https://formspree.io/f/mqakpjne" method="POST">
+      <input type="text" name="name" placeholder="Your Name" required><br><br>
+      <input type="email" name="_replyto" placeholder="Your Email" required><br><br>
+      <textarea name="message" rows="5" placeholder="Your Message" required></textarea><br><br>
+      <button type="submit" id="submitBtn">Send Message</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Filiru Paints. Designed with 🎨 and passion.</p>
+  </footer>
+
+  <script>
+    // GitHub Repository Configuration
+    const GH_USER = 'Dizzar-mw';
+    const GH_REPO = 'FiliruPaints';
+
+    // Function to fetch images from a specific folder
+    async function fetchImages(folder, targetId) {
+      const container = document.getElementById(targetId);
+      const apiUrl = `https://api.github.com/repos/${GH_USER}/${GH_REPO}/contents/${folder}`;
+
+      try {
+        const response = await fetch(apiUrl);
+        if (!response.ok) throw new Error('Folder not found');
+        const files = await response.json();
+
+        container.innerHTML = ''; // Clear loading text
+
+        files.forEach(file => {
+          if (file.name.match(/\.(jpg|jpeg|png|webp|gif)$/i)) {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+              <img src="${file.download_url}" alt="${file.name}">
+              <p>View Project</p>
+            `;
+            
+            // Pop-up Trigger
+            card.onclick = () => {
+              document.getElementById('modalImg').src = file.download_url;
+              document.getElementById('photoModal').style.display = 'flex';
+            };
+            
+            container.appendChild(card);
+          }
+        });
+      } catch (err) {
+        container.innerHTML = `<p>Add images to "${folder}" on GitHub to see them here.</p>`;
+      }
+    }
+
+    // AJAX Form Handling
+    const form = document.getElementById('contactForm');
+    const btn = document.getElementById('submitBtn');
+
+    form.onsubmit = async (e) => {
+      e.preventDefault();
+      btn.innerText = "Sending...";
+      const formData = new FormData(form);
+
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        alert("Thank you! Desire Mapira has received your message.");
+        form.reset();
+      } else {
+        alert("There was an error. Please contact us at 0882772100.");
+      }
+      btn.innerText = "Send Message";
+    };
+
+    // Initialize all 4 galleries on load
+    window.onload = () => {
+      fetchImages('gallery1', 'gallery1'); // T-Shirts
+      fetchImages('gallery2', 'gallery2'); // Houses
+      fetchImages('gallery3', 'gallery3'); // Portraits
+      fetchImages('gallery4', 'gallery4'); // Banners
+    };
+  </script>
+</body>
+</html>
