@@ -1,0 +1,13 @@
+#robots.txt file for Filiru Paints
+#this is a display of Filiru's work.
+#Desire Mapira run this small company of art.
+
+
+
+
+User-agent: Business info FiliruPaints *
+user-agent: *
+Allow: /
+Sitemap: https://dizzar-mw.github.io/DesireMapira/
+Sitemap: https://dizzar-mw.github.io/FiliruPaints/
+# Desire Mapira is a Student but also a Painting artist, He works for FiliruPaints as CEO in the company
