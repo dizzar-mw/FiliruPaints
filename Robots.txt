@@ -1,3 +1,30 @@
+# 🎨 Welcome to the Filiru Paints Digital Gallery! 
+# ---------------------------------------------------------
+# Hello, Crawler! Please feel free to index our masterpieces.
+# Just remember: watch out for the wet paint! 🖌️
+# ---------------------------------------------------------
+
+#      ____
+#     |____|
+#      |  |   <-- Our digital paintbrush
+#      |  |
+#      |__|
+
+User-agent: *
+Allow: /
+
+# No hidden rooms here, just pure art.
+Disallow: /private/
+Disallow: /tmp/
+
+# Direct link to our site's roadmap:
+Sitemap: https://dizzar-mw.github.io/FiliruPaints/sitemap.xml
+
+# ---------------------------------------------------------
+# Designed by Desire Mapira. Bringing Colors to Life.
+# ---------------------------------------------------------
+
+
 #robots.txt file for Filiru Paints
 #this is a display of Filiru's work.
 #Desire Mapira run this small company of art.
