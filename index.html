@@ -1,128 +1,191 @@
 
 
 
-
-<!--
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FiliruPaints AI Assistant</title>
-    <style>
-        :root { --main: #2563eb; --bg: #f8fafc; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg); margin: 0; display: flex; flex-direction: column; height: 100vh; color: #1e293b; }
-        #chat-window { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 15px; }
-        .bubble { max-width: 80%; padding: 12px 16px; border-radius: 20px; font-size: 15px; line-height: 1.5; }
-        .user { align-self: flex-end; background: var(--main); color: white; border-bottom-right-radius: 2px; }
-        .bot { align-self: flex-start; background: white; border: 1px solid #e2e8f0; border-bottom-left-radius: 2px; }
-        #input-bar { padding: 15px; background: white; display: flex; gap: 10px; border-top: 1px solid #e2e8f0; }
-        input { flex: 1; border: 1px solid #cbd5e1; border-radius: 30px; padding: 12px 20px; outline: none; }
-        button { background: var(--main); color: white; border: none; padding: 10px 25px; border-radius: 30px; font-weight: 600; cursor: pointer; }
-        #admin-panel { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; z-index: 1000; padding: 30px; box-sizing: border-box; overflow-y: auto; }
-        .log-card { background: #f1f5f9; margin-bottom: 15px; padding: 15px; border-radius: 12px; border-left: 5px solid var(--main); }
-        #specter-trigger { position: fixed; bottom: 0; right: 0; width: 50px; height: 50px; cursor: default; opacity: 0; }
-    </style>
+  <meta name="google-site-verification" content="ueYvXyFdGsVcHyYBAlXatFvcg30CtsmPAdAV3ilQRcs" />
+  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Filiru Paints</title>
+  
+<link rel="icon" type="image/png" href="favicon.png">
+  <meta property="og:title" content="Filiru Paints" />
+<meta property="og:description" content="Bringing Colors to Life – Houses, Lodges, Art & More" />
+<meta property="og:image" content="https://dizzar-mw.github.io/FiliruPaints/1.png" />
+<meta property="og:url" content="https://dizzar-mw.github.io/FiliruPaints" />
+<meta property="og:type" content="website" />
+
+<meta name="twitter:card" content="summary" />
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+    }
+    header {
+      background: linear-gradient(135deg, #ff9800, #ff5722);
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 3rem;
+      margin: 0;
+    }
+    header p {
+      font-size: 1.3rem;
+      margin-top: 10px;
+    }
+    nav {
+      position: sticky;
+      top: 0;
+      background: #222;
+      padding: 10px;
+      text-align: center;
+    }
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      color: #ff9800;
+    }
+    section {
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .services, .gallery, .team {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: #f4f4f4;
+      border-radius: 12px;
+      padding: 20px;
+      transition: transform 0.3s;
+    }
+    .card:hover {
+      transform: scale(1.05);
+      background: #ffe0b2;
+    }
+    .card img {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 15px;
+    }
+    footer {
+      background: #222;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    footer a {
+      color: #ff9800;
+      text-decoration: none;
+    }
+  </style>
 </head>
 <body>
 
-<div id="chat-window">
-    <div class="bubble bot">Hi! Welcome to <strong>FiliruPaints</strong>. 🎨 I'm your AI assistant. I can help you with portrait pricing, artistic project quotes, or take a message for the artist while they are offline. How can I help you today?</div>
-</div>
+  <!-- Hero -->
+  <header>
+    <h1>Filiru Paints</h1>
+    <p>Bringing Colors to Life – Houses, Lodges, Art & More</p>
+  </header>
 
-<div id="input-bar">
-    <input type="text" id="user-input" placeholder="Ask about a painting or quote..." onkeypress="if(event.key==='Enter') runChat()">
-    <button onclick="runChat()">Send</button>
-</div>
+  <!-- Navigation -->
+  <nav>
+    <a href="#services">Services</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#team">Our Team</a>
+    <a href="#contact">Contact</a>
+  </nav>
 
-<div id="specter-trigger" onclick="openAdmin()"></div>
-<div id="admin-panel">
-    <div style="display:flex; justify-content: space-between; align-items: center;">
-        <h2>FiliruPaints Customer Leads</h2>
-        <button onclick="document.getElementById('admin-panel').style.display='none'" style="background:#ef4444;">Close</button>
+  <!-- Services -->
+  <section id="services">
+    <h2>Our Services</h2>
+    <div class="services">
+      <div class="card"><h3>House Painting</h3><p>Professional house and lodge painting with vibrant colors.</p></div>
+      <div class="card"><h3>Sign Writing</h3><p>Custom sign designs to make your brand stand out.</p></div>
+      <div class="card"><h3>Portrait Drawing</h3><p>Hand-drawn portraits full of detail and life.</p></div>
+      <div class="card"><h3>T-shirt Printing</h3><p>Screen printed T-shirts with artistic designs.</p></div>
     </div>
-    <hr>
-    <div id="leads-list">Loading notifications...</div>
-</div>
+  </section>
+
+  <!-- Gallery -->
+  <section id="gallery">
+    <h2>Gallery</h2>
+    <div class="gallery">
+      <div class="card"><img src="1.png" alt="Painted House"><p>Beautifully painted house</p></div>
+      <div class="card"><img src="2.png" alt="Sign Writing"><p>Custom sign artwork</p></div>
+      <div class="card"><img src="3.png" alt="Portrait"><p>Hand-drawn portrait</p></div>
+      <div class="card"><img src="4.jpg" alt="T-shirt Print"><p>Creative T-shirt design</p></div>
+    </div>
+  </section>
+
+  <!-- Team -->
+  <section id="team">
+    <h2>Meet Our Team</h2>
+    <div class="team">
+      <div class="card">
+        <img src="fisa.jpg" alt="Desire Mapira">
+        <h3>Desire Mapira</h3>
+        <p>Manager of Filiru Paints</p>
+      </div>
+      <!-- Add more members here -->
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <p>Email: <a href="mailto:desiremapira@gmail.com">desiremapira@gmail.com</a></p>
+    <p>Phone: <a href="tel:0882772100">0882772100</a></p>
+    <form id="contactForm" action="https://formspree.io/f/desiremapira@gmail.com" method="POST">
+  <input type="text" name="name" placeholder="Your Name" required><br><br>
+  <input type="email" name="_replyto" placeholder="Your Email" required><br><br>
+  <textarea name="message" placeholder="Your Message" required></textarea><br><br>
+  
+  <button type="submit">Send Message</button>
+</form>
 
 <script>
-    // Config from your credentials
-    const GEMINI_KEY = "AIzaSyDvQK-_6W7qXVyKP0aVvP6nCzusDujRMI"; 
-    const SUPA_URL = "https://mjhkwrvxpcmababyvfrx.supabase.co"; 
-    const SUPA_KEY = "sb_publishable_bTlo8kc6ZVz-KqG_9wD5TA_C69o7kQS";
-    const TABLE_NAME = "FiliruPaintsAssistantAI";
+  const form = document.getElementById('contactForm');
+  
+  form.onsubmit = async (e) => {
+    e.preventDefault(); // Stop page from refreshing
+    
+    const formData = new FormData(form);
+    
+    // Sending the data
+    const response = await fetch(form.action, {
+      method: 'POST',
+      body: formData,
+      headers: { 'Accept': 'application/json' }
+    });
 
-    const bizInfo = "You are the AI assistant for FiliruPaints. The business owner is an artist specializing in painting, portraits, and A4 pencil art. Your goal is to capture customer needs (like what they want painted) so the owner can respond later.";
-    let chatLog = [];
-
-    async function runChat() {
-        const input = document.getElementById('user-input');
-        const text = input.value.trim();
-        if (!text) return;
-
-        addBubble(text, 'user');
-        input.value = '';
-        chatLog.push(`Customer: ${text}`);
-
-        try {
-            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_KEY}`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ contents: [{ parts: [{ text: bizInfo + "\nRecent Conversation:\n" + chatLog.join("\n") }] }] })
-            });
-            const data = await response.json();
-            const aiText = data.candidates[0].content.parts[0].text;
-            
-            addBubble(aiText, 'bot');
-            chatLog.push(`AI: ${aiText}`);
-
-            // Save lead summary to Supabase if it seems like a serious inquiry
-            if (chatLog.length >= 4 || /paint|portrait|pencil|price|cost|order/i.test(text)) {
-                saveLead(text);
-            }
-        } catch (e) { console.error("Chat Error:", e); }
+    if (response.ok) {
+      // The professional pop-up you requested
+      alert("Thank you for reaching out! Your message has been successfully sent. Desire will review your inquiry and get back to you as soon as possible.");
+      form.reset(); // Clears the form
+    } else {
+      alert("Oops! There was a problem sending your message. Please try again.");
     }
-
-    function addBubble(text, side) {
-        const d = document.createElement('div');
-        d.className = `bubble ${side}`;
-        d.innerText = text;
-        document.getElementById('chat-window').appendChild(d);
-        d.scrollIntoView({ behavior: 'smooth' });
-    }
-
-    async function saveLead(lastMsg) {
-        const summary = `Customer needs info on: ${lastMsg}`;
-        await fetch(`${SUPA_URL}/rest/v1/${TABLE_NAME}`, {
-            method: "POST",
-            headers: { 
-                "apikey": SUPA_KEY, 
-                "Authorization": `Bearer ${SUPA_KEY}`, 
-                "Content-Type": "application/json",
-                "Prefer": "return=minimal" 
-            },
-            body: JSON.stringify({ customer_name: "Web Visitor", summary: summary })
-        });
-    }
-
-    function openAdmin() {
-        if (prompt("Enter Admin Password:") === "fisa") {
-            document.getElementById('admin-panel').style.display = 'block';
-            loadLeads();
-        }
-    }
-
-    async function loadLeads() {
-        const res = await fetch(`${SUPA_URL}/rest/v1/${TABLE_NAME}?select=*&order=created_at.desc`, {
-            headers: { "apikey": SUPA_KEY, "Authorization": `Bearer ${SUPA_KEY}` }
-        });
-        const data = await res.json();
-        document.getElementById('leads-list').innerHTML = data.map(item => `
-            <div class="log-card">
-                <strong>Time:</strong> ${new Date(item.created_at).toLocaleString()}<br>
-                <strong>Customer Need:</strong> ${item.summary}
-            </div>
-        `).join('') || "No messages found yet.";
-    }
+  };
 </script>
-</body>
-</html> -->
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Filiru Paints. Designed with 🎨 and passion.<div class="myGoogle"><a href="googled9c77bd8130aaed3.html"><div style="width:10px">verify google</div></a></div> </p>
+  </footer>
+
+
+  
+</html>
