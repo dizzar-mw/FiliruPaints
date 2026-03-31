@@ -13,4 +13,4 @@ jobs:
         with:
           app-name: "filirupaints"
           url: "https://dizzar-mw.github.io/filirupaints/"
-          output-name: "FiliruPaints.apk"
+          output-name: "filirupaints.apk"
