@@ -1,3 +1,6 @@
+
+
+
 name: Build APK
 on: [push]
 
@@ -8,17 +11,21 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Build Web to APK
-        # This is a working tool that replaces the deleted one
-        uses: jaylyons1/web-to-apk@v1.4.0 
+      - name: set up JDK 11
+        uses: actions/setup-java@v3
         with:
-          app-name: "filirupaints"
-          url: "https://dizzar-mw.github.io/filirupaints/"
-          output-name: "filirupaints.apk"
-          icon-path: "favicon.png" 
+          java-version: '11'
+          distribution: 'temurin'
+          cache: gradle
+
+      - name: Build with Bubblewrap
+        run: |
+          npm install -g @bubblewrap/cli
+          yes | bubblewrap init --manifest="https://dizzar-mw.github.io/filirupaints/manifest.json"
+          bubblewrap build
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: filirupaints-release
-          path: filirupaints.apk
+          path: "*.apk"
