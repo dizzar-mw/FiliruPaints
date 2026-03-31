@@ -4,8 +4,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
       - name: Build Web to APK
+        # Added the version number below to fix the error
         uses: simple-elf/web-to-apk@v1.2.0
         with:
           app-name: "FiliruPaints"
