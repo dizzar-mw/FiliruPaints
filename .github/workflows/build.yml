@@ -11,6 +11,6 @@ jobs:
         # Added the version number below to fix the error
         uses: simple-elf/web-to-apk@v1.2.0
         with:
-          app-name: "FiliruPaints"
+          app-name: "filirupaints"
           url: "https://dizzar-mw.github.io/filirupaints/"
           output-name: "FiliruPaints.apk"
