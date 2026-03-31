@@ -1,6 +1,6 @@
 {
-  "name": "FiliruPaints",
-  "short_name": "Filiru",
+  "name": "filirupaints",
+  "short_name": "filirupaints",
   "start_url": "index.html",
   "display": "standalone",
   "background_color": "#ffffff",
