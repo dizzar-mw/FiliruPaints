@@ -1,0 +1,13 @@
+name: Build APK
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build Web to APK
+        uses: simple-elf/web-to-apk@v1.2.0
+        with:
+          app-name: "FiliruPaints"
+          url: "https://dizzar-mw.github.io/filirupaints/"
+          output-name: "FiliruPaints.apk"
