@@ -9,6 +9,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build Web to APK
+        # This is a working tool that replaces the deleted one
         uses: jaylyons1/web-to-apk@v1.4.0 
         with:
           app-name: "filirupaints"
@@ -16,7 +17,7 @@ jobs:
           output-name: "filirupaints.apk"
           icon-path: "favicon.png" 
 
-      - name: Upload APK Artifact
+      - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: filirupaints-release
