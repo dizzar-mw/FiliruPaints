@@ -28,9 +28,6 @@
 </div>
 
 <script>
-    // Point this to your Render URL
-    const BACKEND_URL = "https://filirupaints-backending.onrender.com";
-
     async function send() {
         const input = document.getElementById('user-msg');
         const text = input.value.trim();
@@ -46,20 +43,20 @@
                 body: JSON.stringify({ message: text })
             });
 
+            // THIS LINE IS KEY: If the status is not 200, throw an error with the details
+            if (!response.ok) {
+                const errorData = await response.text(); 
+                throw new Error(`Server returned ${response.status}: ${errorData}`);
+            }
+
             const data = await response.json();
-            // Display the answer from your backend
             addMsg(data.response || "No response received.", 'bot');
         } catch (error) {
-            addMsg("I'm having trouble connecting to the server.", 'bot');
+            // Now this will show the actual error message on your screen
+            addMsg("Error: " + error.message, 'bot');
+            console.error("Fetch Error:", error);
         }
     }
-
-    function addMsg(txt, sender) {
-        const d = document.createElement('div');
-        d.className = `msg ${sender}`;
-        d.innerText = txt;
-        document.getElementById('chat-container').appendChild(d);
-        d.scrollIntoView();
     }
 </script>
 </body>
