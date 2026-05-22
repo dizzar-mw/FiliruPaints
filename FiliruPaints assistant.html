@@ -3,63 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FiliruPaints AI Assistant</title>
+    <title>FiliruPaints Assistant</title>
     <style>
-        :root { --main: #2563eb; --bg: #f1f5f9; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); margin: 0; display: flex; flex-direction: column; height: 100vh; }
-        #chat-window { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 12px; }
-        .bubble { max-width: 75%; padding: 12px 16px; border-radius: 18px; font-size: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-        .user { align-self: flex-end; background: var(--main); color: white; border-bottom-right-radius: 2px; }
-        .bot { align-self: flex-start; background: white; color: #1e293b; border-bottom-left-radius: 2px; }
-        #input-bar { padding: 15px; background: white; display: flex; gap: 10px; border-top: 1px solid #e2e8f0; }
-        input { flex: 1; border: 1px solid #cbd5e1; border-radius: 25px; padding: 10px 20px; outline: none; }
-        button { background: var(--main); color: white; border: none; padding: 10px 25px; border-radius: 25px; font-weight: bold; cursor: pointer; }
+        :root { --primary: #2563eb; --bg: #f8fafc; }
+        body { font-family: sans-serif; background: var(--bg); margin: 0; display: flex; flex-direction: column; height: 100vh; }
+        #chat-container { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 10px; }
+        .msg { max-width: 80%; padding: 10px 15px; border-radius: 15px; font-size: 14px; line-height: 1.4; }
+        .user { align-self: flex-end; background: var(--primary); color: white; border-bottom-right-radius: 2px; }
+        .bot { align-self: flex-start; background: white; border: 1px solid #e2e8f0; border-bottom-left-radius: 2px; }
+        #input-area { padding: 15px; background: white; border-top: 1px solid #e2e8f0; display: flex; gap: 10px; }
+        input { flex: 1; padding: 10px; border: 1px solid #cbd5e1; border-radius: 20px; outline: none; }
+        button { padding: 10px 20px; background: var(--primary); color: white; border: none; border-radius: 20px; cursor: pointer; }
     </style>
 </head>
 <body>
 
-<div id="chat-window">
-    <div class="bubble bot">Welcome to <strong>FiliruPaints</strong>! I'm your AI assistant. How can I help?</div>
+<div id="chat-container">
+    <div class="msg bot">Hi! How can I help you with your painting needs today?</div>
 </div>
 
-<div id="input-bar">
-    <input type="text" id="user-msg" placeholder="Ask about paintings or art..." onkeypress="if(event.key==='Enter') send()">
+<div id="input-area">
+    <input type="text" id="user-msg" placeholder="Ask anything..." onkeypress="if(event.key==='Enter') send()">
     <button onclick="send()">Send</button>
 </div>
 
 <script>
-    // Your Render backend URL
+    // Point this to your Render URL
     const BACKEND_URL = "https://filirupaints-backending.onrender.com";
 
     async function send() {
-        const box = document.getElementById('user-msg');
-        const text = box.value.trim();
+        const input = document.getElementById('user-msg');
+        const text = input.value.trim();
         if(!text) return;
 
-        addBubble(text, 'user');
-        box.value = '';
+        addMsg(text, 'user');
+        input.value = '';
 
         try {
-            // Send message to Render backend
-            const res = await fetch(`${BACKEND_URL}/chat`, {
+            const response = await fetch(`${BACKEND_URL}/chat`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ message: text })
             });
 
-            const data = await res.json();
-            addBubble(data.response, 'bot');
-        } catch (err) { 
-            console.error("Connection Error:", err); 
-            addBubble("Sorry, I'm having trouble connecting to the server.", 'bot');
+            const data = await response.json();
+            // Display the answer from your backend
+            addMsg(data.response || "No response received.", 'bot');
+        } catch (error) {
+            addMsg("I'm having trouble connecting to the server.", 'bot');
         }
     }
 
-    function addBubble(txt, side) {
+    function addMsg(txt, sender) {
         const d = document.createElement('div');
-        d.className = `bubble ${side}`;
+        d.className = `msg ${sender}`;
         d.innerText = txt;
-        document.getElementById('chat-window').appendChild(d);
+        document.getElementById('chat-container').appendChild(d);
         d.scrollIntoView();
     }
 </script>
